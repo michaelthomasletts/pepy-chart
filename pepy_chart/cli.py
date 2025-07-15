@@ -14,11 +14,23 @@ from .core import PepyStats
     required=True,
 )
 @option(
+    "-a",
+    "--apikey",
+    type=str,
+    help="The PePy API key",
+    required=True,
+)
+@option(
+    "-c",
+    "--createimage",
+    is_flag=bool,
+    help="Whether to create chart or not",
+)
+@option(
     "-op",
     "--outputpath",
     type=str,
     help="Where to save the image",
-    required=True,
 )
 @option(
     "-rw",
@@ -37,9 +49,20 @@ from .core import PepyStats
     "-c", "--color", type=str, help="The prevailing color", default="#FF0000FF"
 )
 @option("-f", "--fontsize", type=int, default=14)
-def create(package, outputpath, rollingwindow, openimage, color, fontsize):
-    PepyStats(
+def create(
+    package,
+    apikey,
+    createimage,
+    outputpath,
+    rollingwindow,
+    openimage,
+    color,
+    fontsize,
+):
+    ps = PepyStats(
         package=package,
+        api_key=apikey,
+        create_image=createimage,
         output_path=outputpath,
         rolling_window=rollingwindow,
         automatically_open_img=openimage,
